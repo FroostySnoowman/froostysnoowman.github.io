@@ -94,15 +94,16 @@ function Projects() {
             className="relative flex max-h-[90vh] max-w-[90vw] flex-col overflow-auto rounded-lg bg-blue-9 shadow-2xl"
             onClick={(e) => e.stopPropagation()}
           >
-            <Image
-              src={expandedProject.image_path}
-              alt=""
-              placeholder="blur"
-              width={expandedProject.image_path.width}
-              height={expandedProject.image_path.height}
-              className="w-full max-w-full shrink-0 object-contain"
-              sizes="90vw"
-            />
+            <div className="relative h-[60vh] w-full max-w-[90vw] shrink-0 md:h-[70vh]">
+              <Image
+                src={expandedProject.image_path}
+                alt=""
+                placeholder="blur"
+                fill
+                className="object-contain"
+                sizes="(max-width: 768px) 90vw, 1200px"
+              />
+            </div>
             <div className="p-4 sm:p-6">
               <h2
                 className={cn(
