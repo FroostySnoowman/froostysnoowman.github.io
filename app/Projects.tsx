@@ -94,6 +94,14 @@ function Projects() {
             className="relative flex max-h-[90vh] max-w-[90vw] flex-col overflow-auto rounded-lg bg-blue-9 shadow-2xl"
             onClick={(e) => e.stopPropagation()}
           >
+            <button
+              type="button"
+              onClick={() => setExpandedProjectId(-1)}
+              className="absolute right-2 top-2 z-10 flex h-8 w-8 items-center justify-center rounded-full bg-white/10 text-white-1 transition-colors hover:bg-white/20 focus:outline-none focus:ring-2 focus:ring-blue-8"
+              aria-label="Close"
+            >
+              <span className="text-xl leading-none" aria-hidden>×</span>
+            </button>
             <div className="relative h-[60vh] w-full max-w-[90vw] shrink-0 md:h-[70vh]">
               <Image
                 src={expandedProject.image_path}
