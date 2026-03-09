@@ -5,6 +5,7 @@ import Link from "next/link";
 
 import "./style/footer.css";
 import { useLanguage } from "./contexts/language-context";
+import { MAILTO_URL } from "@/lib/contact";
 import { useState } from "react";
 
 
@@ -65,7 +66,7 @@ function Footer() {
 
           <FooterMedia
             name={texts.footer.mail}
-            href="mailto:jacob.j.beal@icloud.com"
+            href={MAILTO_URL}
           />
 
           <button

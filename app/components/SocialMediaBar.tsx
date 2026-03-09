@@ -6,6 +6,7 @@ import githubBadge from "../../public/img/social_media/github-badge.svg";
 import linkedinBadge from "../../public/img/social_media/linkedin-badge.svg";
 import mailBadge from "../../public/img/social_media/mail-badge.svg";
 import { useLanguage } from "../contexts/language-context";
+import { MAILTO_URL } from "@/lib/contact";
 
 type Props = {
   speed: number;
@@ -99,7 +100,7 @@ export default function SocialMediaBar({ speed }: Props) {
           <SocialMedia
             svgSrc={mailBadge}
             num="3"
-            href="mailto:jacob.j.beal@icloud.com"
+            href={MAILTO_URL}
             alt={texts.hero.social.altMail}
           />
 
