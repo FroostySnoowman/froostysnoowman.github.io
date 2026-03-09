@@ -1,0 +1,36 @@
+.timeline-box {
+    background-color: #003b64;
+    border: solid 1px #6aceff;
+}
+
+.timeline-middle svg {
+    color: #a2fff4;
+}
+
+.timeline li hr {
+    background-color: #f7f7f7;
+}
+
+.timeline li .first-hr {
+    background: linear-gradient(to right, transparent, #f7f7f7);
+}
+
+.timeline li .last-hr {
+    background: linear-gradient(to right, #f7f7f7, transparent);
+}
+
+@media (min-width:1024px) {
+
+    .timeline li .first-hr {
+        background: linear-gradient(to bottom, transparent, #f7f7f7);
+    }
+
+    .timeline li .last-hr {
+        background: linear-gradient(to bottom, #f7f7f7, transparent);
+    }
+
+    .timeline-box {
+        margin-bottom: 30px;
+    }
+
+}
