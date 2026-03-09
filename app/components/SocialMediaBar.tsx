@@ -1,6 +1,7 @@
 import { ParallaxLayer } from "@react-spring/parallax";
 import { useEffect } from "react";
 import SocialMedia from "./SocialMedia";
+import discordBadge from "../../public/img/social_media/discord-badge.svg";
 import githubBadge from "../../public/img/social_media/github-badge.svg";
 import linkedinBadge from "../../public/img/social_media/linkedin-badge.svg";
 import mailBadge from "../../public/img/social_media/mail-badge.svg";
@@ -51,6 +52,9 @@ export default function SocialMediaBar({ speed }: Props) {
             case 3:
               selecteurText.textContent = texts.footer.mail;
               break;
+            case 4:
+              selecteurText.textContent = texts.footer.discord;
+              break;
           }
         }
       });
@@ -97,6 +101,22 @@ export default function SocialMediaBar({ speed }: Props) {
             num="3"
             href="mailto:jacob.j.beal@icloud.com"
             alt={texts.hero.social.altMail}
+          />
+
+          <SocialMedia
+            svgSrc={discordBadge}
+            num="4"
+            alt={texts.hero.social.altDiscord}
+            onClick={() => {
+              navigator.clipboard.writeText("someone0171");
+              const el = document.getElementById("social-media-selecteur-text");
+              if (el) {
+                el.textContent = "Copied!";
+                setTimeout(() => {
+                  el.textContent = "";
+                }, 2000);
+              }
+            }}
           />
         </div>
 

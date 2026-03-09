@@ -8,6 +8,7 @@ const textsEn = {
       altGit: "GitHub social media icon",
       altLinkedin: "LinkedIn social media icon",
       altMail: "Email social media icon",
+      altDiscord: "Discord social media icon",
     },
     nav: {
       backToTop: "Back to top",
@@ -61,6 +62,7 @@ const textsEn = {
     mail: "Email",
     git: "GitHub",
     linkedin: "LinkedIn",
+    discord: "Discord",
   },
 };
 

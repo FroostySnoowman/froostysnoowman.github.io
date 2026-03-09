@@ -5,6 +5,7 @@ import Link from "next/link";
 
 import "./style/footer.css";
 import { useLanguage } from "./contexts/language-context";
+import { useState } from "react";
 
 
 type Props = {
@@ -26,6 +27,13 @@ const FooterMedia = ({ name, href }: Props) => {
 
 function Footer() {
   const { texts } = useLanguage();
+  const [discordCopied, setDiscordCopied] = useState(false);
+
+  const handleDiscordCopy = () => {
+    navigator.clipboard.writeText("someone0171");
+    setDiscordCopied(true);
+    setTimeout(() => setDiscordCopied(false), 2000);
+  };
 
   return (
     <ParallaxLayer
@@ -59,6 +67,14 @@ function Footer() {
             name={texts.footer.mail}
             href="mailto:jacob.j.beal@icloud.com"
           />
+
+          <button
+            type="button"
+            onClick={handleDiscordCopy}
+            className="p-fluide-anim p-footer-text transform px-2 py-3 hover:scale-105 hover:text-blue-1"
+          >
+            {discordCopied ? "Copied!" : texts.footer.discord}
+          </button>
         </div>
       </div>
     </ParallaxLayer>

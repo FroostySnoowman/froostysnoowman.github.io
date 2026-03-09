@@ -8,10 +8,12 @@ import { useOnScreen } from "./hooks/useOnScreen";
 import { cn } from "@/lib/utils";
 import SocialMedia from "./components/SocialMedia";
 import meImg from "../public/img/me.png";
+import discordBadge from "../public/img/social_media/discord-badge.svg";
 import githubBadge from "../public/img/social_media/github-badge.svg";
 import linkedinBadge from "../public/img/social_media/linkedin-badge.svg";
 import mailBadge from "../public/img/social_media/mail-badge.svg";
 import { useLanguage } from "./contexts/language-context";
+import { useState } from "react";
 
 function About() {
   const [aboutRef, aboutVisible] = useOnScreen<HTMLDivElement>();
@@ -19,8 +21,15 @@ function About() {
   const [descRef, descVisible] = useOnScreen<HTMLDivElement>();
   const [cvRef, cvVisible] = useOnScreen<HTMLButtonElement>();
   const [contactRef, contactVisible] = useOnScreen<HTMLDivElement>();
+  const [discordCopied, setDiscordCopied] = useState(false);
 
   const { texts } = useLanguage();
+
+  const handleDiscordCopy = () => {
+    navigator.clipboard.writeText("someone0171");
+    setDiscordCopied(true);
+    setTimeout(() => setDiscordCopied(false), 2000);
+  };
 
   return (
     <ParallaxLayer
@@ -110,7 +119,19 @@ function About() {
                 alt={texts.hero.social.altMail}
               />
             </div>
+
+            <div className="rounded-full bg-gradient-to-tr from-blue-1 to-blue-6 p-px duration-150 hover:scale-125">
+              <SocialMedia
+                svgSrc={discordBadge}
+                num="4"
+                alt={texts.hero.social.altDiscord}
+                onClick={handleDiscordCopy}
+              />
+            </div>
           </div>
+          {discordCopied && (
+            <span className="text-sm text-blue-1">Copied!</span>
+          )}
         </div>
       </div>
 
