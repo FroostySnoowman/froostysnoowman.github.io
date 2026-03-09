@@ -18,7 +18,7 @@ export default function SocialMediaBar({ speed }: Props) {
   }, );
 
   function headerSetup() {
-    const selecteur = document.getElementById("social-media-selecteur");
+    const selecteurBar = document.getElementById("social-media-selecteur-bar");
 
     const selecteurText = document.getElementById(
       "social-media-selecteur-text",
@@ -37,9 +37,9 @@ export default function SocialMediaBar({ speed }: Props) {
         const offset_first =
           document.getElementById(`social-media-badge-${1}`)?.offsetLeft ?? 0;
 
-        if (selecteur) {
-          selecteur.style.width = `${socialMedia.clientWidth}px`;
-          selecteur.style.left = `${offset - offset_first}px`;
+        if (selecteurBar) {
+          selecteurBar.style.width = `${socialMedia.clientWidth}px`;
+          selecteurBar.style.left = `${offset - offset_first}px`;
         }
 
         if (selecteurText) {
@@ -61,9 +61,9 @@ export default function SocialMediaBar({ speed }: Props) {
       });
 
       socialMedia.addEventListener("mouseleave", () => {
-        if (selecteur) {
-          selecteur.style.width = `100%`;
-          selecteur.style.left = `0`;
+        if (selecteurBar) {
+          selecteurBar.style.width = `100%`;
+          selecteurBar.style.left = `0`;
         }
         if (selecteurText) {
           selecteurText.textContent = " ";
@@ -88,6 +88,7 @@ export default function SocialMediaBar({ speed }: Props) {
             num="1"
             href="https://github.com/FroostySnoowman/"
             alt={texts.hero.social.altGit}
+            title={texts.footer.git}
           />
 
           <SocialMedia
@@ -95,6 +96,7 @@ export default function SocialMediaBar({ speed }: Props) {
             num="2"
             href="https://www.linkedin.com/in/jacobjbeal/"
             alt={texts.hero.social.altLinkedin}
+            title={texts.footer.linkedin}
           />
 
           <SocialMedia
@@ -102,12 +104,14 @@ export default function SocialMediaBar({ speed }: Props) {
             num="3"
             href={MAILTO_URL}
             alt={texts.hero.social.altMail}
+            title={texts.footer.mail}
           />
 
           <SocialMedia
             svgSrc={discordBadge}
             num="4"
             alt={texts.hero.social.altDiscord}
+            title={texts.footer.discord}
             onClick={() => {
               navigator.clipboard.writeText("someone0171");
               const el = document.getElementById("social-media-selecteur-text");
@@ -126,8 +130,12 @@ export default function SocialMediaBar({ speed }: Props) {
           className="flex flex-col items-center rounded-full"
         >
           <div
+            id="social-media-selecteur-bar"
+            className="w-full rounded-full"
+          />
+          <div
             id="social-media-selecteur-text"
-            className="mt-2 text-nowrap text-center text-sm text-blue-8"
+            className="mt-2 min-h-[1.25rem] text-nowrap text-center text-sm text-blue-8"
           ></div>
         </div>
       </div>

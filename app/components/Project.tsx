@@ -1,6 +1,7 @@
 "use client";
 
 import { cn } from "@/lib/utils";
+import { fontJersey15, fontInter } from "@/lib/font";
 import "../style/project.css";
 import SocialMedia from "./SocialMedia";
 import Image from "next/image";
@@ -48,7 +49,7 @@ function Project({ ref, id, isExpanded, onExpand, className }: Props) {
     <div
       ref={ref}
       className={cn(
-        "group relative mx-4 my-2 flex-grow cursor-pointer overflow-hidden rounded-md border-2 border-blue-7/50 transition-all duration-500 hover:border-blue-6/80 lg:w-96 lg:flex-grow-0 lg:hover:-translate-y-7 lg:hover:scale-105",
+        "group relative mx-6 my-2 flex-grow cursor-pointer overflow-hidden rounded-md border-2 border-blue-7/50 transition-all duration-500 hover:border-blue-6/80 sm:mx-4 lg:w-96 lg:flex-grow-0 lg:hover:-translate-y-7 lg:hover:scale-105",
         "aspect-[4/3] min-h-[180px] w-full sm:min-h-[240px] lg:min-h-0",
         className,
       )}
@@ -69,6 +70,28 @@ function Project({ ref, id, isExpanded, onExpand, className }: Props) {
           className="object-contain"
           sizes="(max-width: 1024px) 100vw, 24rem"
         />
+      </div>
+
+      <div className="pointer-events-none absolute inset-0 flex flex-col items-center justify-center bg-black/70 p-4 opacity-0 transition-opacity duration-300 group-hover:opacity-100">
+        <h3
+          className={cn(
+            "text-center text-lg font-bold text-white-1 lg:text-xl",
+            fontJersey15.className,
+          )}
+        >
+          {selectedProject?.title}
+        </h3>
+        <p
+          className={cn(
+            "mt-2 max-h-[60vh] overflow-y-auto text-center text-xs leading-relaxed text-white-1/90 lg:text-sm",
+            fontInter.className,
+          )}
+        >
+          {selectedProject?.description ?? texts.projects.noDescription}
+        </p>
+        <span className={cn("mt-2 text-center text-xs text-blue-8", fontInter.className)}>
+          {texts.projects.seeMore}
+        </span>
       </div>
 
       <div onClick={(e) => e.stopPropagation()}>

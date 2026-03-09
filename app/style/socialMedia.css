@@ -17,13 +17,19 @@
 #social-media-selecteur {
   position: relative;
   left: 0;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+#social-media-selecteur-bar {
+  position: relative;
+  left: 0;
   height: 3px;
   width: 100%;
-
   box-shadow: 0 0 10px #00131c;
-
   background-color: #002545;
-
   transition: left 0.3s ease-in-out, width 0.3s ease-in-out;
 }
 
