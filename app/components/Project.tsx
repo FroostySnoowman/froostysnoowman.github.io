@@ -49,7 +49,7 @@ function Project({ ref, id, isExpanded, onExpand, className }: Props) {
     <div
       ref={ref}
       className={cn(
-        "group relative mx-6 my-2 flex-grow cursor-pointer overflow-hidden rounded-md border-2 border-blue-7/50 transition-all duration-500 hover:border-blue-6/80 sm:mx-4 lg:w-96 lg:flex-grow-0 lg:hover:-translate-y-7 lg:hover:scale-105",
+        "group relative mx-auto my-2 w-full max-w-[88vw] flex-grow cursor-pointer overflow-hidden rounded-md border-2 border-blue-7/50 transition-all duration-500 hover:border-blue-6/80 sm:mx-4 sm:max-w-none lg:w-96 lg:flex-grow-0 lg:hover:-translate-y-7 lg:hover:scale-105",
         "aspect-[4/3] min-h-[180px] w-full sm:min-h-[240px] lg:min-h-0",
         className,
       )}
