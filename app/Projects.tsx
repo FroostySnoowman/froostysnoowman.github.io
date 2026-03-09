@@ -8,6 +8,7 @@ import { useOnScreen } from "./hooks/useOnScreen";
 import { cn } from "@/lib/utils";
 import projectsEn from "../lang/data-projects-en";
 import Image from "next/image";
+import { fontJersey15, fontInter } from "@/lib/font";
 
 function Projects() {
   const [expandedProjectId, setExpandedProjectId] = useState(-1);
@@ -90,7 +91,7 @@ function Projects() {
           aria-label="Project screenshot"
         >
           <div
-            className="relative max-h-[90vh] max-w-[90vw] overflow-hidden rounded-lg shadow-2xl"
+            className="relative flex max-h-[90vh] max-w-[90vw] flex-col overflow-auto rounded-lg bg-blue-9 shadow-2xl"
             onClick={(e) => e.stopPropagation()}
           >
             <Image
@@ -99,10 +100,27 @@ function Projects() {
               placeholder="blur"
               width={expandedProject.image_path.width}
               height={expandedProject.image_path.height}
-              className="max-h-[90vh] w-auto max-w-full object-contain"
+              className="w-full max-w-full shrink-0 object-contain"
               sizes="90vw"
-              onClick={(e) => e.stopPropagation()}
             />
+            <div className="p-4 sm:p-6">
+              <h2
+                className={cn(
+                  "mb-2 text-xl font-bold text-white-1 lg:text-2xl",
+                  fontJersey15.className,
+                )}
+              >
+                {expandedProject.title}
+              </h2>
+              <p
+                className={cn(
+                  "text-sm leading-relaxed text-white-1/90 lg:text-base",
+                  fontInter.className,
+                )}
+              >
+                {expandedProject.description}
+              </p>
+            </div>
           </div>
         </div>,
         document.body,

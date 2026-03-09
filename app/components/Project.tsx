@@ -1,7 +1,6 @@
 "use client";
 
 import { cn } from "@/lib/utils";
-import { fontJersey15 } from "@/lib/font";
 import "../style/project.css";
 import SocialMedia from "./SocialMedia";
 import Image from "next/image";
@@ -70,25 +69,6 @@ function Project({ ref, id, isExpanded, onExpand, className }: Props) {
           className="object-contain"
           sizes="(max-width: 1024px) 100vw, 24rem"
         />
-      </div>
-
-      <div
-        className={cn(
-          "absolute inset-0 flex flex-col justify-end bg-gradient-to-t from-black/85 via-black/50 to-transparent p-4 pb-10 pr-10 transition-opacity duration-300 sm:p-6 sm:pb-14 sm:pr-14",
-          "opacity-100 md:opacity-0 md:group-hover:opacity-100",
-        )}
-      >
-        <h2
-          className={cn(
-            "mb-2 text-xl font-bold text-white-1 lg:text-2xl",
-            fontJersey15.className,
-          )}
-        >
-          {selectedProject?.title}
-        </h2>
-        <p className="text-sm leading-relaxed text-white-1/95 lg:text-base">
-          {selectedProject?.description ?? texts.projects.noDescription}
-        </p>
       </div>
 
       <div onClick={(e) => e.stopPropagation()}>
