@@ -27,6 +27,7 @@ import testingImg from "../public/img/skills/testing.svg";
 import typescriptImg from "../public/img/skills/typescript.svg";
 import viteImg from "../public/img/skills/vite.svg";
 import websocketImg from "../public/img/skills/websocket.svg";
+import zerotrustImg from "../public/img/skills/zerotrust.svg";
 
 const skills = [
   {
@@ -113,6 +114,10 @@ const skills = [
     id: 5,
     title: "Security & Authentication",
     subSkills: [
+      {
+        name: "Zero Trust",
+        image: zerotrustImg,
+      },
       {
         name: "OAuth",
         image: authImg,
