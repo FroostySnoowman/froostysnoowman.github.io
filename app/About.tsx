@@ -43,7 +43,7 @@ function About() {
           aboutVisible ? "" : "opacity-0",
         )}
       >
-        <div className="lg:gap0 m-px flex flex-col items-center justify-evenly gap-8 rounded-2xl bg-blue-9/95 py-8 lg:h-full  lg:py-0 dark:bg-blue-1/85">
+        <div className="m-px flex flex-col items-center justify-evenly gap-4 rounded-2xl bg-blue-9/95 py-8 lg:h-full lg:gap-0 lg:py-0 dark:bg-blue-1/85">
           <Image
             ref={imgRef}
             id="img-me"
@@ -59,7 +59,7 @@ function About() {
           <div
             ref={descRef}
             className={cn(
-              "mx-12 max-w-[400px] text-sm transition-all duration-500 ease-in-out lg:text-base",
+              "mx-6 max-w-[400px] text-sm transition-all duration-500 ease-in-out sm:mx-12 lg:text-base",
               descVisible ? "" : "-translate-x-40 opacity-0",
             )}
           >
@@ -80,7 +80,7 @@ function About() {
           <div
             ref={contactRef}
             className={cn(
-              "flex flex-row gap-5 transition-all duration-500 ease-in-out md:scale-125",
+              "flex flex-row gap-5 transition-all duration-500 ease-in-out sm:scale-110 md:scale-125",
               contactVisible ? "" : "-translate-x-40 opacity-0",
             )}
           >
@@ -114,7 +114,7 @@ function About() {
         </div>
       </div>
 
-      <Timeline className="scale-90 lg:scale-110" />
+      <Timeline className="scale-[0.7] sm:scale-90 lg:scale-110" />
     </ParallaxLayer>
   );
 }

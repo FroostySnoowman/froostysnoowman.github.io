@@ -20,7 +20,7 @@ function BackToTopButton({ className = "", parallaxRef }: Props) {
   return (
     <button
       className={cn(
-        "p-backtotop fixed right-0 top-0 z-50 px-4 pt-5 text-3xl text-blue-1 shadow-blue-1 transition duration-200 ease-in-out hover:scale-110 active:scale-[1.2] dark:text-blue-9 dark:shadow-blue-9 lg:px-12 lg:pt-9 lg:text-4xl",
+        "p-backtotop fixed right-0 top-0 z-50 min-h-[44px] min-w-[44px] px-4 pt-5 text-3xl text-blue-1 shadow-blue-1 transition duration-200 ease-in-out hover:scale-110 active:scale-[1.2] dark:text-blue-9 dark:shadow-blue-9 lg:px-12 lg:pt-9 lg:text-4xl",
         className,
         fontJersey15.className,
       )}

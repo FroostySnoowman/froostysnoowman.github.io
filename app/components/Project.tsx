@@ -1,7 +1,6 @@
 "use client";
 
 import { cn } from "@/lib/utils";
-import Button from "./Button";
 import { fontJersey15 } from "@/lib/font";
 import "../style/project.css";
 import SocialMedia from "./SocialMedia";
@@ -51,7 +50,7 @@ function Project({ ref, id, isExpanded, onExpand, className }: Props) {
       ref={ref}
       className={cn(
         "group relative mx-4 my-2 flex-grow cursor-pointer overflow-hidden rounded-md border-2 border-blue-7/50 transition-all duration-500 hover:border-blue-6/80 lg:w-96 lg:flex-grow-0 lg:hover:-translate-y-7 lg:hover:scale-105",
-        "aspect-[4/3] min-h-[240px] w-full lg:min-h-0",
+        "aspect-[4/3] min-h-[180px] w-full sm:min-h-[240px] lg:min-h-0",
         className,
       )}
       style={{
@@ -75,8 +74,8 @@ function Project({ ref, id, isExpanded, onExpand, className }: Props) {
 
       <div
         className={cn(
-          "absolute inset-0 flex flex-col justify-end bg-gradient-to-t from-black/85 via-black/50 to-transparent p-6 pb-14 pr-14 transition-opacity duration-300",
-          "opacity-0 group-hover:opacity-100",
+          "absolute inset-0 flex flex-col justify-end bg-gradient-to-t from-black/85 via-black/50 to-transparent p-4 pb-10 pr-10 transition-opacity duration-300 sm:p-6 sm:pb-14 sm:pr-14",
+          "opacity-100 md:opacity-0 md:group-hover:opacity-100",
         )}
       >
         <h2
@@ -91,14 +90,6 @@ function Project({ ref, id, isExpanded, onExpand, className }: Props) {
           {selectedProject?.description ?? texts.projects.noDescription}
         </p>
       </div>
-
-      <span onClick={(e) => e.stopPropagation()}>
-        <Button
-          text={texts.projects.seeMore}
-          className="absolute bottom-3 left-1/2 z-20 -translate-x-1/2 scale-90 md:hidden"
-          onClick={() => onExpand(id)}
-        />
-      </span>
 
       <div onClick={(e) => e.stopPropagation()}>
         <SocialMedia

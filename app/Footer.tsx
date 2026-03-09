@@ -17,7 +17,7 @@ const FooterMedia = ({ name, href }: Props) => {
     <Link
       href={href}
       target="_blank"
-      className="p-fluide-anim p-footer-text transform hover:scale-105 hover:text-blue-1"
+      className="p-fluide-anim p-footer-text transform px-2 py-3 hover:scale-105 hover:text-blue-1"
     >
       {name}
     </Link>
@@ -32,9 +32,9 @@ function Footer() {
       offset={3}
       speed={0}
       factor={1.1}
-      className="min-[600px] pointer-events-none relative z-20"
+      className="pointer-events-none relative z-20"
     >
-      <div className="pointer-events-auto absolute bottom-0 flex h-9 w-full flex-row items-center justify-evenly">
+      <div className="pointer-events-auto absolute bottom-0 flex h-12 w-full flex-row items-center justify-evenly">
         <span className={cn(fontJersey15.className, "text-xl lg:text-3xl")}>
           {texts.hero.jacob}
         </span>
@@ -42,7 +42,7 @@ function Footer() {
         <div
           className={cn(
             fontInter.className,
-            "lg:text:md flex flex-row gap-3 text-sm lg:gap-16",
+            "flex flex-row gap-3 text-sm lg:gap-16 lg:text-base",
           )}
         >
           <FooterMedia

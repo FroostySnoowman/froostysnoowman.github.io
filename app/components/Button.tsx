@@ -17,7 +17,7 @@ function Button({ ref, text, className = "", onClick = () => {} }: Props) {
     >
       <div className="absolute inset-0 rounded-lg bg-gradient-to-r from-blue-4 to-blue-5" />
 
-      <div className="group relative rounded-[6px] bg-blue-9 px-8 py-2 text-xs font-semibold transition duration-200 hover:bg-transparent hover:text-blue-9 active:blur-sm lg:text-base">
+      <div className="group relative rounded-[6px] bg-blue-9 px-8 py-3 text-xs font-semibold transition duration-200 hover:bg-transparent hover:text-blue-9 active:blur-sm lg:text-base">
         {text}
       </div>
     </button>

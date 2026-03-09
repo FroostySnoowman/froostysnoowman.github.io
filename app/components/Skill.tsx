@@ -25,30 +25,30 @@ function Skill({ id, className = "", style }: Props) {
     >
       <span
         className={cn(
-          "shrink-0 text-center text-2xl/6 text-blue-1 lg:text-2xl",
+          "shrink-0 text-center text-lg/5 text-blue-1 sm:text-2xl/6",
           fontJersey15.className,
         )}
       >
         {selectedSkill?.title}
       </span>
 
-      <span className="mb-2 mt-1 h-px w-4/5 shrink-0 self-center bg-blue-1"></span>
+      <span className="mb-1 mt-1 h-px w-4/5 shrink-0 self-center bg-blue-1 sm:mb-2"></span>
 
-      <div className="ml-2 flex min-h-0 flex-1 flex-col">
+      <div className="ml-1 flex min-h-0 flex-1 flex-col sm:ml-2">
         {selectedSkill?.subSkills?.map((subSkill, index) => (
-          <div key={index} className="mb-2 flex flex-row items-center">
+          <div key={index} className="mb-1 flex flex-row items-center sm:mb-2">
             {subSkill.image ? (
               <Image
                 alt={`${texts.skills.altSkills} ${subSkill.name}`}
                 src={subSkill.image}
-                className="w-7"
+                className="w-5 sm:w-7"
               />
             ) : (
-              <span className="inline-flex h-7 w-7 items-center justify-center rounded-md border border-blue-3/60 text-xs text-blue-2">
+              <span className="inline-flex h-5 w-5 items-center justify-center rounded-md border border-blue-3/60 text-[10px] text-blue-2 sm:h-7 sm:w-7 sm:text-xs">
                 *
               </span>
             )}
-            <span className={cn(fontInter.className, "ml-2 text-sm")}>
+            <span className={cn(fontInter.className, "ml-1 text-xs sm:ml-2 sm:text-sm")}>
               {subSkill.name}
             </span>
           </div>

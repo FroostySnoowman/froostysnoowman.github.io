@@ -50,7 +50,7 @@ function Hero({ parallaxRef }: Props) {
       <Name
         speed={-4}
         text={texts.hero.jacob}
-        className="translate-y-[-20px] text-6xl text-blue-7 lg:translate-y-[-30px] lg:text-8xl"
+        className="translate-y-[-20px] text-5xl text-blue-7 sm:text-6xl lg:translate-y-[-30px] lg:text-8xl"
       />
 
       <BackgroundLayer speed={-0.4} path={img7Bridge} />
