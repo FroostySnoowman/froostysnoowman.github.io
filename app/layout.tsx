@@ -5,6 +5,7 @@ import { cn } from "@/lib/utils";
 import metadataInfos from "@/lib/metadata";
 import { LanguageProvider } from "./contexts/language-context";
 import { ThemeProvider } from "./contexts/themes-context";
+import PageTransition from "./components/PageTransition";
 
 export const metadata: Metadata = metadataInfos;
 
@@ -17,7 +18,9 @@ export default function RootLayout({
     <html lang="en" className="dark">
       <body className={cn(fontInter.className, "p-minimal-size text-white-1 dark:text-blue-10")}>
         <LanguageProvider>
-          <ThemeProvider>{children}</ThemeProvider>
+          <ThemeProvider>
+            <PageTransition>{children}</PageTransition>
+          </ThemeProvider>
         </LanguageProvider>
       </body>
     </html>

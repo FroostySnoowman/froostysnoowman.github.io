@@ -65,3 +65,33 @@
 .debug {
   outline: solid red 3px;
 }
+
+/* Softer page crossfade when View Transitions API is used (e.g. by browser or future integration) */
+@supports (view-transition-name: none) {
+  ::view-transition-old(page-content),
+  ::view-transition-old(root) {
+    animation: view-transition-fade-out 0.4s ease-out both;
+  }
+  ::view-transition-new(page-content),
+  ::view-transition-new(root) {
+    animation: view-transition-fade-in 0.4s ease-out 0.05s both;
+  }
+}
+
+@keyframes view-transition-fade-out {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
+
+@keyframes view-transition-fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}

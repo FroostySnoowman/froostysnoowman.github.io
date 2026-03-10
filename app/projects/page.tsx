@@ -2,7 +2,7 @@
 
 import { useState, useEffect, useRef } from "react";
 import { createPortal } from "react-dom";
-import Link from "next/link";
+import ViewTransitionLink from "../components/ViewTransitionLink";
 import Image from "next/image";
 import { motion } from "motion/react";
 import Project from "../components/Project";
@@ -64,7 +64,7 @@ export default function ProjectsPage() {
     <div className="min-h-screen bg-blue-9 dark:bg-blue-4">
       {/* Back to home */}
       <div className="fixed left-4 top-4 z-50">
-        <Link
+        <ViewTransitionLink
           href="/"
           className={cn(
             "inline-flex items-center gap-2 rounded-full border border-white/20 bg-blue-9/90 px-4 py-2.5 text-sm font-medium text-white-1 shadow-lg backdrop-blur-sm transition-colors hover:border-white/40 hover:bg-blue-8/90 hover:text-white-1",
@@ -72,7 +72,7 @@ export default function ProjectsPage() {
           )}
         >
           <span aria-hidden>←</span> Back to home
-        </Link>
+        </ViewTransitionLink>
       </div>
 
       {/* Wrapper for parallax zone (1000px) + gradient fade into solid panel */}
