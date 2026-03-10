@@ -10,6 +10,7 @@ import { cn } from "@/lib/utils";
 import projectsEn from "../lang/data-projects-en";
 import Image from "next/image";
 import { fontJersey15, fontInter } from "@/lib/font";
+import githubBadge from "../public/img/social_media/github-badge.svg";
 
 function Projects() {
   const [expandedProjectId, setExpandedProjectId] = useState(-1);
@@ -45,7 +46,7 @@ function Projects() {
     <ParallaxLayer
       offset={2}
       speed={0}
-      className="h-min-[600px] flex items-center justify-center bg-blue-9 dark:bg-blue-4"
+      className="h-min-[600px] flex items-center justify-center bg-transparent"
     >
       <div className="flex h-full w-full flex-col items-center justify-center gap-10 px-4 py-8 lg:h-4/5 lg:min-h-[600px] lg:gap-12 lg:py-12">
         <div className="flex w-full flex-col items-center justify-center gap-4 lg:flex-row lg:gap-7">
@@ -141,6 +142,26 @@ function Projects() {
               >
                 {expandedProject.description}
               </p>
+              {expandedProject.link && expandedProject.link !== "#" && (
+                <a
+                  href={expandedProject.link}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className={cn(
+                    "mt-4 inline-flex items-center gap-2 rounded-lg border border-blue-6/60 bg-blue-8/50 px-4 py-2.5 text-sm font-medium text-white-1 transition-colors hover:border-blue-5 hover:bg-blue-7/70",
+                    fontInter.className,
+                  )}
+                >
+                  <Image
+                    src={githubBadge}
+                    alt=""
+                    width={20}
+                    height={20}
+                    className="shrink-0"
+                  />
+                  View on GitHub
+                </a>
+              )}
             </div>
           </div>
         </div>,

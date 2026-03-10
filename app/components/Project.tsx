@@ -3,11 +3,9 @@
 import { cn } from "@/lib/utils";
 import { fontJersey15, fontInter } from "@/lib/font";
 import "../style/project.css";
-import SocialMedia from "./SocialMedia";
 import Image from "next/image";
 import { Ref } from "react";
 import projectsEn from "../../lang/data-projects-en";
-import githubBadge from "../../public/img/social_media/github-badge.svg";
 import { useLanguage } from "../contexts/language-context";
 
 type Props = {
@@ -23,38 +21,19 @@ function Project({ ref, id, isExpanded, onExpand, className }: Props) {
 
   const selectedProject = projects.find((project) => project.id === id);
 
-  const bg_col = selectedProject?.color ?? "#000000";
-
-  const darkenColor = (color: string, percent: number) => {
-    const hex = color.replace("#", "");
-
-    const r = parseInt(hex.substring(0, 2), 16);
-    const g = parseInt(hex.substring(2, 4), 16);
-    const b = parseInt(hex.substring(4, 6), 16);
-
-    const newR = Math.floor(r * (1 - percent));
-    const newG = Math.floor(g * (1 - percent));
-    const newB = Math.floor(b * (1 - percent));
-
-    return `#${((1 << 24) | (newR << 16) | (newG << 8) | newB)
-      .toString(16)
-      .slice(1)}`;
-  };
-
-  const darkenedColor = darkenColor(bg_col, 0.2);
-
   const { texts } = useLanguage();
 
   return (
     <div
       ref={ref}
       className={cn(
-        "group relative mx-auto my-2 w-full max-w-[88vw] flex-grow cursor-pointer overflow-hidden rounded-md border-2 border-blue-7/50 transition-all duration-500 hover:border-blue-6/80 sm:mx-4 sm:max-w-none lg:w-96 lg:flex-grow-0 lg:hover:-translate-y-7 lg:hover:scale-105",
+        "group relative mx-auto my-2 w-full max-w-[88vw] flex-grow cursor-pointer overflow-hidden rounded-md transition-all duration-500 sm:mx-4 sm:max-w-none lg:w-96 lg:flex-grow-0 lg:hover:-translate-y-7 lg:hover:scale-105",
         "aspect-[4/3] min-h-[180px] w-full sm:min-h-[240px] lg:min-h-0",
+        "border border-white/[0.08] shadow-[0_8px_32px_rgba(0,0,0,0.4)] lg:hover:shadow-[0_16px_48px_rgba(0,0,0,0.5)]",
         className,
       )}
       style={{
-        background: darkenedColor,
+        background: "transparent",
       }}
       onClick={() => onExpand(id)}
       onKeyDown={(e) => e.key === "Enter" && onExpand(id)}
@@ -72,7 +51,11 @@ function Project({ ref, id, isExpanded, onExpand, className }: Props) {
         />
       </div>
 
-      <div className="pointer-events-none absolute inset-0 flex flex-col items-center justify-center bg-black/70 p-4 opacity-0 transition-opacity duration-300 group-hover:opacity-100">
+      <div
+        className="absolute inset-0 flex flex-col items-center justify-center bg-black/70 p-4 opacity-0 transition-opacity duration-300 group-hover:opacity-100"
+        onClick={() => onExpand(id)}
+        role="presentation"
+      >
         <h3
           className={cn(
             "text-center text-lg font-bold text-white-1 lg:text-xl",
@@ -83,25 +66,26 @@ function Project({ ref, id, isExpanded, onExpand, className }: Props) {
         </h3>
         <p
           className={cn(
-            "mt-2 max-h-[60vh] overflow-y-auto text-center text-xs leading-relaxed text-white-1/90 lg:text-sm",
+            "mt-2 max-h-[60vh] overflow-y-auto overflow-x-hidden text-center text-xs leading-relaxed text-white-1/90 lg:text-sm",
             fontInter.className,
           )}
+          onClick={(e) => e.stopPropagation()}
+          onKeyDown={(e) => e.stopPropagation()}
+          role="article"
+          tabIndex={0}
         >
           {selectedProject?.description ?? texts.projects.noDescription}
         </p>
-        <span className={cn("mt-2 text-center text-xs text-blue-8", fontInter.className)}>
+        <span
+          className={cn(
+            "mt-3 inline-block rounded-full border border-white/40 bg-white/10 px-3 py-1.5 text-xs font-medium text-white-1 lg:text-sm",
+            fontInter.className,
+          )}
+        >
           {texts.projects.seeMore}
         </span>
       </div>
 
-      <div onClick={(e) => e.stopPropagation()}>
-        <SocialMedia
-          svgSrc={githubBadge}
-          className="p-fluide-anim absolute bottom-1 right-1 z-50 scale-90 shadow-[0_0_5px] shadow-blue-1 lg:bottom-4 lg:right-4 lg:scale-125"
-          href={selectedProject?.link}
-          alt={`${texts.projects.altProjects} ${selectedProject?.title}`}
-        />
-      </div>
     </div>
   );
 }

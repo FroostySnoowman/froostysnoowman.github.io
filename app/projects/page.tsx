@@ -9,6 +9,7 @@ import Project from "../components/Project";
 import { fontJersey15, fontInter } from "@/lib/font";
 import { cn } from "@/lib/utils";
 import projectsEn from "../../lang/data-projects-en";
+import githubBadge from "../../public/img/social_media/github-badge.svg";
 import "../style/projects-parallax.css";
 
 const PARALLAX_HEIGHT = 1000;
@@ -209,6 +210,26 @@ export default function ProjectsPage() {
                 >
                   {expandedProject.description}
                 </p>
+                {expandedProject.link && expandedProject.link !== "#" && (
+                  <a
+                    href={expandedProject.link}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className={cn(
+                      "mt-4 inline-flex items-center gap-2 rounded-lg border border-blue-6/60 bg-blue-8/50 px-4 py-2.5 text-sm font-medium text-white-1 transition-colors hover:border-blue-5 hover:bg-blue-7/70",
+                      fontInter.className,
+                    )}
+                  >
+                    <Image
+                      src={githubBadge}
+                      alt=""
+                      width={20}
+                      height={20}
+                      className="shrink-0"
+                    />
+                    View on GitHub
+                  </a>
+                )}
               </div>
             </div>
           </div>,
