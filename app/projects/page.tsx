@@ -113,27 +113,33 @@ export default function ProjectsPage() {
         </p>
       </div>
 
-      {/* Projects grid (scrolls up after parallax) */}
-      <section className="relative z-10 mx-auto max-w-6xl px-4 py-16 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3">
-          {projectsEn.map((project, index) => (
-            <motion.div
-              key={project.id}
-              initial={{ opacity: 0, y: 24 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: index * 0.08, duration: 0.4 }}
-              className="flex justify-center"
-            >
-              <Project
-                id={project.id}
-                isExpanded={expandedProjectId === project.id}
-                onExpand={handleExpandProject}
-                className="max-w-full flex-grow-0 transition-transform duration-300 hover:scale-[1.02] sm:max-w-md lg:max-w-sm"
-              />
-            </motion.div>
-          ))}
-        </div>
-      </section>
+      {/* Solid panel (matches home page #00131c): covers parallax below the fold */}
+      <div
+        className="relative z-10 min-h-screen w-full"
+        style={{ backgroundColor: "#00131c" }}
+      >
+        {/* Projects grid (scrolls up after parallax) */}
+        <section className="mx-auto max-w-6xl px-4 py-16 sm:px-6 lg:px-8">
+          <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3">
+            {projectsEn.map((project, index) => (
+              <motion.div
+                key={project.id}
+                initial={{ opacity: 0, y: 24 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: index * 0.08, duration: 0.4 }}
+                className="flex justify-center"
+              >
+                <Project
+                  id={project.id}
+                  isExpanded={expandedProjectId === project.id}
+                  onExpand={handleExpandProject}
+                  className="max-w-full flex-grow-0 transition-transform duration-300 hover:scale-[1.02] sm:max-w-md lg:max-w-sm"
+                />
+              </motion.div>
+            ))}
+          </div>
+        </section>
+      </div>
 
       {/* Expanded project modal */}
       {expandedProject &&
