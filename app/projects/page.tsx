@@ -74,43 +74,59 @@ export default function ProjectsPage() {
         </Link>
       </div>
 
-      {/* Firewatch-style parallax container: 9 fixed layers, scroll-driven transform */}
+      {/* Wrapper for parallax zone (1000px) + gradient fade into solid panel */}
       <div
-        id="parallax-container"
-        ref={parallaxContainerRef}
+        className="relative"
         style={{ height: PARALLAX_HEIGHT }}
       >
-        {Array.from({ length: LAYER_COUNT }, (_, i) => (
-          <div
-            key={i}
-            style={{
-              backgroundImage: `url(/img/projects_hero/parallax${i}.png)`,
-            }}
-          />
-        ))}
-      </div>
+        {/* Firewatch-style parallax container: 9 fixed layers, scroll-driven transform */}
+        <div
+          id="parallax-container"
+          ref={parallaxContainerRef}
+          style={{ height: PARALLAX_HEIGHT }}
+        >
+          {Array.from({ length: LAYER_COUNT }, (_, i) => (
+            <div
+              key={i}
+              style={{
+                backgroundImage: `url(/img/projects_hero/parallax${i}.png)`,
+              }}
+            />
+          ))}
+        </div>
 
-      {/* Title block (same height as parallax, scrolls with content) */}
-      <div
-        className="relative z-10 flex flex-col items-center justify-center px-4 text-center"
-        style={{ height: PARALLAX_HEIGHT, marginTop: -PARALLAX_HEIGHT }}
-      >
-        <h1
-          className={cn(
-            "text-5xl font-bold text-white-1 drop-shadow-lg sm:text-6xl lg:text-7xl",
-            fontJersey15.className,
-          )}
+        {/* Gradient overlay: smooth transition from parallax to #00131c */}
+        <div
+          className="pointer-events-none absolute bottom-0 left-0 right-0 z-10"
+          style={{
+            height: 200,
+            background: "linear-gradient(to bottom, transparent, #00131c)",
+          }}
+          aria-hidden
+        />
+
+        {/* Title block (same height as parallax, scrolls with content) */}
+        <div
+          className="relative z-10 flex flex-col items-center justify-center px-4 text-center"
+          style={{ height: PARALLAX_HEIGHT, marginTop: -PARALLAX_HEIGHT }}
         >
-          Projects
-        </h1>
-        <p
-          className={cn(
-            "mt-3 max-w-xl text-base text-white-1/90 sm:text-lg",
-            fontInter.className,
-          )}
-        >
-          Full-stack apps, Discord platforms, mobile experiences, and more.
-        </p>
+          <h1
+            className={cn(
+              "text-5xl font-bold text-white-1 drop-shadow-lg sm:text-6xl lg:text-7xl",
+              fontJersey15.className,
+            )}
+          >
+            Projects
+          </h1>
+          <p
+            className={cn(
+              "mt-3 max-w-xl text-base text-white-1/90 sm:text-lg",
+              fontInter.className,
+            )}
+          >
+            Full-stack apps, Discord platforms, mobile experiences, and more.
+          </p>
+        </div>
       </div>
 
       {/* Solid panel (matches home page #00131c): covers parallax below the fold */}
