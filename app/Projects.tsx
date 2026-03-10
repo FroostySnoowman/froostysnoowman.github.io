@@ -47,45 +47,45 @@ function Projects() {
       speed={0}
       className="h-min-[600px] flex items-center justify-center bg-blue-9 dark:bg-blue-4"
     >
-      <div className="flex h-full w-full flex-col justify-center lg:h-4/5 lg:min-h-[600px] lg:flex-row">
-        <Project
-          ref={project1Ref}
-          id={1}
-          isExpanded={expandedProjectId === 1}
-          onExpand={handleExpandProject}
-          className={cn(
-            "transition-all duration-1000 ease-in-out hover:duration-300",
-            project1Visible ? "" : "pointer-events-none opacity-0",
-          )}
-        />
-        <Project
-          ref={project2Ref}
-          id={2}
-          isExpanded={expandedProjectId === 2}
-          onExpand={handleExpandProject}
-          className={cn(
-            "transition-all delay-300 duration-1000 ease-in-out hover:delay-0 hover:duration-300",
-            project2Visible ? "" : "opacity-0",
-          )}
-        />
-        <Project
-          ref={project3Ref}
-          id={3}
-          isExpanded={expandedProjectId === 3}
-          onExpand={handleExpandProject}
-          className={cn(
-            "transition-all delay-[600ms] duration-1000 ease-in-out hover:delay-0 hover:duration-300",
-            project3Visible ? "" : "opacity-0",
-          )}
-        />
-      </div>
-      <div className="mt-8 flex justify-center">
+      <div className="flex h-full w-full flex-col items-center justify-center gap-10 px-4 py-8 lg:h-4/5 lg:min-h-[600px] lg:gap-12 lg:py-12">
+        <div className="flex w-full flex-col items-center justify-center gap-4 lg:flex-row lg:gap-7">
+          <Project
+            ref={project1Ref}
+            id={1}
+            isExpanded={expandedProjectId === 1}
+            onExpand={handleExpandProject}
+            className={cn(
+              "transition-all duration-1000 ease-in-out hover:duration-300",
+              project1Visible ? "" : "pointer-events-none opacity-0",
+            )}
+          />
+          <Project
+            ref={project2Ref}
+            id={2}
+            isExpanded={expandedProjectId === 2}
+            onExpand={handleExpandProject}
+            className={cn(
+              "transition-all delay-300 duration-1000 ease-in-out hover:delay-0 hover:duration-300",
+              project2Visible ? "" : "opacity-0",
+            )}
+          />
+          <Project
+            ref={project3Ref}
+            id={3}
+            isExpanded={expandedProjectId === 3}
+            onExpand={handleExpandProject}
+            className={cn(
+              "transition-all delay-[600ms] duration-1000 ease-in-out hover:delay-0 hover:duration-300",
+              project3Visible ? "" : "opacity-0",
+            )}
+          />
+        </div>
         <Link
           href="/projects"
-          className="relative inline-block p-[2px] transition-opacity hover:opacity-90"
+          className="relative inline-block shrink-0 p-[2px] transition-opacity hover:opacity-90"
         >
           <span className="absolute inset-0 rounded-lg bg-gradient-to-r from-blue-4 to-blue-5" />
-          <span className="relative block rounded-[6px] bg-blue-9 px-8 py-3 text-xs font-semibold text-white-1 transition duration-200 hover:bg-transparent hover:text-blue-9 lg:text-base">
+          <span className="relative block rounded-[6px] bg-blue-9 px-6 py-2.5 text-xs font-semibold text-white-1 transition duration-200 hover:bg-transparent hover:text-blue-9 sm:px-8 sm:py-3 lg:text-base">
             View More
           </span>
         </Link>
