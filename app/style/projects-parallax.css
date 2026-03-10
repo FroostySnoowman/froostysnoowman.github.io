@@ -1,0 +1,17 @@
+#parallax-container {
+  height: 1000px;
+  display: block;
+}
+
+#parallax-container div {
+  position: fixed;
+  top: 0;
+  left: 0;
+  background-position: center !important;
+  background-repeat: no-repeat !important;
+  background-size: cover !important;
+  transform: translateY(0px);
+  height: 1000px;
+  width: 100%;
+  pointer-events: none;
+}

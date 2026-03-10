@@ -27,6 +27,30 @@ const projects = [
     link: "https://ticketsx.xyz",
     color: "#4f46e5",
   },
+  {
+    id: 4,
+    title: "CraftDownUnder",
+    description: "Web presence and internal tooling for CraftDownUnder. Built with modern React and TypeScript, with a focus on clarity and maintainability.",
+    image_path: servicesxImg,
+    link: "https://www.craftdownunder.co",
+    color: "#b45309",
+  },
+  {
+    id: 5,
+    title: "Portfolio",
+    description: "This portfolio site. Next.js, Tailwind, parallax backgrounds, and responsive design. Deployed on GitHub Pages.",
+    image_path: mybreakpointImg,
+    link: "https://froostysnoowman.github.io",
+    color: "#0e7490",
+  },
+  {
+    id: 6,
+    title: "Coming Soon",
+    description: "Another project in the works. Full-stack app with real-time features and a polished UI.",
+    image_path: ticketsxImg,
+    link: "#",
+    color: "#6d28d9",
+  },
 ];
 
 export default projects;

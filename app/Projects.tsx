@@ -3,6 +3,7 @@
 import { useState, useEffect } from "react";
 import { createPortal } from "react-dom";
 import { ParallaxLayer } from "@react-spring/parallax";
+import Link from "next/link";
 import Project from "./components/Project";
 import { useOnScreen } from "./hooks/useOnScreen";
 import { cn } from "@/lib/utils";
@@ -77,6 +78,17 @@ function Projects() {
             project3Visible ? "" : "opacity-0",
           )}
         />
+      </div>
+      <div className="mt-8 flex justify-center">
+        <Link
+          href="/projects"
+          className="relative inline-block p-[2px] transition-opacity hover:opacity-90"
+        >
+          <span className="absolute inset-0 rounded-lg bg-gradient-to-r from-blue-4 to-blue-5" />
+          <span className="relative block rounded-[6px] bg-blue-9 px-8 py-3 text-xs font-semibold text-white-1 transition duration-200 hover:bg-transparent hover:text-blue-9 lg:text-base">
+            View More
+          </span>
+        </Link>
       </div>
     </ParallaxLayer>
 
