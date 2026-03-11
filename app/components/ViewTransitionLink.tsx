@@ -9,9 +9,16 @@ type ViewTransitionLinkProps = Omit<ComponentProps<typeof Link>, "href"> & {
   href: string;
 };
 
-declare global {
-  interface Document {
-    startViewTransition?(callback: () => Promise<void> | void): { finished: Promise<void> };
+function startViewTransitionIfSupported(
+  callback: () => Promise<void> | void,
+): void {
+  const doc = document as Document & {
+    startViewTransition?: (callback: () => Promise<void> | void) => { finished: Promise<void> };
+  };
+  if (typeof doc.startViewTransition === "function") {
+    doc.startViewTransition(callback);
+  } else {
+    void (typeof callback === "function" ? callback() : Promise.resolve());
   }
 }
 
@@ -35,8 +42,8 @@ export default function ViewTransitionLink({
         router.push(href);
         return new Promise<void>((resolve) => setTimeout(resolve, 80));
       };
-      if (typeof document !== "undefined" && document.startViewTransition) {
-        document.startViewTransition(run);
+      if (typeof document !== "undefined") {
+        startViewTransitionIfSupported(run);
       } else {
         run();
       }
