@@ -19,7 +19,7 @@ export default function SocialMediaBar({ speed }: Props) {
 
   function headerSetup() {
     const selecteurBar = document.getElementById("social-media-selecteur-bar");
-
+    const selecteurContainer = document.getElementById("social-media-selecteur");
     const selecteurText = document.getElementById(
       "social-media-selecteur-text",
     );
@@ -32,14 +32,12 @@ export default function SocialMediaBar({ speed }: Props) {
       socialMedia.addEventListener("mouseenter", () => {
         const num = parseInt(socialMedia.dataset.num ?? "0");
 
-        const offset = socialMedia?.offsetLeft ?? 0;
+        const iconRect = socialMedia.getBoundingClientRect();
+        const selecteurRect = selecteurContainer?.getBoundingClientRect();
 
-        const offset_first =
-          document.getElementById(`social-media-badge-${1}`)?.offsetLeft ?? 0;
-
-        if (selecteurBar) {
-          selecteurBar.style.width = `${socialMedia.clientWidth}px`;
-          selecteurBar.style.left = `${offset - offset_first}px`;
+        if (selecteurBar && selecteurRect) {
+          selecteurBar.style.width = `${iconRect.width}px`;
+          selecteurBar.style.left = `${iconRect.left - selecteurRect.left}px`;
         }
 
         if (selecteurText) {
