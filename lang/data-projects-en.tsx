@@ -1,6 +1,9 @@
 import mybreakpointImg from "../public/img/projects/mybreakpoint.png";
 import servicesxImg from "../public/img/projects/servicesx.png";
 import ticketsxImg from "../public/img/projects/ticketsx.png";
+import craftdownunderImg from "../public/img/projects/craftdownunder.png";
+import portfolioImg from "../public/img/projects/portfolio.png";
+import b2bImg from "../public/img/projects/b2b.png";
 
 const projects = [
   {
@@ -30,8 +33,8 @@ const projects = [
   {
     id: 4,
     title: "CraftDownUnder",
-    description: "Web presence and internal tooling for CraftDownUnder. Built with modern React and TypeScript, with a focus on clarity and maintainability.",
-    image_path: servicesxImg,
+    description: "Designed and maintained Craft Down Under's backend services, including Redis (pub/sub, caching, and command dispatch), relational and other databases, and REST APIs that serve 300k+ player records for lookups, bans, economy, and awards. I built and maintained integrations between Redis, databases, and game servers via Redis pub/sub, and implemented pipelines, reconnection logic, and cross-service flows so the Discord bot, APIs, and game servers stayed reliable at scale.",
+    image_path: craftdownunderImg,
     link: "https://www.craftdownunder.co",
     color: "#b45309",
   },
@@ -39,15 +42,15 @@ const projects = [
     id: 5,
     title: "Portfolio",
     description: "This portfolio site. Next.js, Tailwind, parallax backgrounds, and responsive design. Deployed on GitHub Pages.",
-    image_path: mybreakpointImg,
+    image_path: portfolioImg,
     link: "https://froostysnoowman.github.io",
     color: "#0e7490",
   },
   {
     id: 6,
-    title: "Coming Soon",
-    description: "Another project in the works. Full-stack app with real-time features and a polished UI.",
-    image_path: ticketsxImg,
+    title: "B2B Lead Management",
+    description: "This is a Campaign Manager / Lead Management app: a React frontend on Cloudflare Pages, a Cloudflare Workers API, and Cloudflare D1 (SQLite) for storage. It supports JWT auth, campaigns, leads, admin management, and optional domain verification with automatic custom-domain setup on Pages. One remote D1 database is used for both dev and production.",
+    image_path: b2bImg,
     link: "#",
     color: "#6d28d9",
   },
