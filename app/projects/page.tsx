@@ -1,23 +1,50 @@
 "use client";
 
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef, useMemo } from "react";
 import { createPortal } from "react-dom";
 import ViewTransitionLink from "../components/ViewTransitionLink";
 import Image from "next/image";
-import { motion } from "motion/react";
 import Project from "../components/Project";
 import { fontJersey15, fontInter } from "@/lib/font";
 import { cn } from "@/lib/utils";
-import projectsEn from "../../lang/data-projects-en";
+import projectsEn, {
+  PROJECT_CATEGORIES,
+  type ProjectCategory,
+} from "../../lang/data-projects-en";
 import githubBadge from "../../public/img/social_media/github-badge.svg";
 import "../style/projects-parallax.css";
 
 const PARALLAX_HEIGHT = 1000;
 const LAYER_COUNT = 9;
 
+/** Shared with back link / modal: blue-9 surface, cyan accent when selected. */
+const filterChipBase = cn(
+  "inline-flex items-center rounded-full border px-3.5 py-2 text-sm font-medium transition-[color,background-color,border-color,box-shadow] duration-200",
+  "focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-5 focus-visible:ring-offset-2 focus-visible:ring-offset-blue-9",
+);
+
+type FilterValue = "all" | ProjectCategory;
+
 export default function ProjectsPage() {
   const [expandedProjectId, setExpandedProjectId] = useState(-1);
+  const [activeFilter, setActiveFilter] = useState<FilterValue>("all");
   const parallaxContainerRef = useRef<HTMLDivElement>(null);
+
+  const categoryCounts = useMemo(() => {
+    const map = new Map<ProjectCategory, number>();
+    for (const c of PROJECT_CATEGORIES) {
+      map.set(
+        c,
+        projectsEn.filter((p) => p.categories.includes(c)).length,
+      );
+    }
+    return map;
+  }, []);
+
+  const filteredProjects = useMemo(() => {
+    if (activeFilter === "all") return projectsEn;
+    return projectsEn.filter((p) => p.categories.includes(activeFilter));
+  }, [activeFilter]);
 
   const handleExpandProject = (id: number) => {
     setExpandedProjectId(expandedProjectId === id ? -1 : id);
@@ -43,6 +70,10 @@ export default function ProjectsPage() {
   }, [expandedProjectId]);
 
   useEffect(() => {
+    setExpandedProjectId(-1);
+  }, [activeFilter]);
+
+  useEffect(() => {
     const parent = parallaxContainerRef.current;
     if (!parent) return;
     const children = parent.getElementsByTagName("div");
@@ -61,13 +92,21 @@ export default function ProjectsPage() {
   }, []);
 
   return (
-    <div className="min-h-screen bg-blue-9 dark:bg-blue-4">
+    <div
+      className={cn(
+        // Own typography + surface: layout uses html.dark + body dark:text-blue-10, which
+        // makes unstyled text nearly invisible on dark panels; never use dark:bg-blue-4 here
+        // (it fights the #00131c content area).
+        "min-h-screen bg-blue-9 text-white-1 dark:bg-blue-9",
+        fontInter.className,
+      )}
+    >
       {/* Back to home */}
       <div className="fixed left-4 top-4 z-50">
         <ViewTransitionLink
           href="/"
           className={cn(
-            "inline-flex items-center gap-2 rounded-full border border-white/20 bg-blue-9/90 px-4 py-2.5 text-sm font-medium text-white-1 shadow-lg backdrop-blur-sm transition-colors hover:border-white/40 hover:bg-blue-8/90 hover:text-white-1",
+            "inline-flex items-center gap-2 rounded-full border border-white/20 bg-blue-9 px-4 py-2.5 text-sm font-medium text-white-1 shadow-lg transition-colors hover:border-white/40 hover:bg-blue-8 hover:text-white-1",
             fontInter.className,
           )}
         >
@@ -132,28 +171,162 @@ export default function ProjectsPage() {
 
       {/* Solid panel (matches home page #00131c): covers parallax below the fold */}
       <div
-        className="relative z-10 min-h-screen w-full"
+        className="relative z-10 min-h-screen w-full bg-blue-9 isolate"
         style={{ backgroundColor: "#00131c" }}
       >
-        {/* Projects grid (scrolls up after parallax) */}
-        <section className="mx-auto max-w-6xl px-4 py-16 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3">
-            {projectsEn.map((project, index) => (
-              <motion.div
-                key={project.id}
-                initial={{ opacity: 0, y: 24 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: index * 0.08, duration: 0.4 }}
-                className="flex justify-center"
+        <section
+          className="mx-auto max-w-6xl px-4 pb-20 pt-10 sm:px-6 sm:pt-12 lg:px-8 lg:pt-14"
+          aria-labelledby="projects-work-heading"
+        >
+          <div className="mb-8 flex flex-col gap-5 sm:mb-10 sm:gap-6">
+            <div className="max-w-2xl">
+              <h2
+                id="projects-work-heading"
+                className={cn(
+                  "text-2xl font-bold text-white-1 sm:text-3xl",
+                  fontJersey15.className,
+                )}
               >
-                <Project
-                  id={project.id}
-                  isExpanded={expandedProjectId === project.id}
-                  onExpand={handleExpandProject}
-                  className="max-w-full flex-grow-0 transition-transform duration-300 hover:scale-[1.02] sm:max-w-md lg:max-w-sm"
-                />
-              </motion.div>
-            ))}
+                Selected work
+              </h2>
+              <p
+                className={cn(
+                  "mt-2 text-sm leading-relaxed text-white-1/80 sm:text-base",
+                  fontInter.className,
+                )}
+              >
+                Use the filters to browse by the kind of work involved—many
+                projects span more than one area.
+              </p>
+            </div>
+
+            <div
+              className={cn(
+                "rounded-2xl border border-blue-6/40 bg-blue-8/80 px-3 py-3 shadow-lg sm:px-4 sm:py-4",
+                fontInter.className,
+              )}
+            >
+              <p
+                id="project-filters-label"
+                className="mb-2.5 text-xs font-medium uppercase tracking-wide text-blue-2"
+              >
+                Filter by type
+              </p>
+              <div
+                className="flex flex-wrap gap-2"
+                role="group"
+                aria-labelledby="project-filters-label"
+              >
+                <button
+                  type="button"
+                  onClick={() => setActiveFilter("all")}
+                  aria-pressed={activeFilter === "all"}
+                  className={cn(
+                    filterChipBase,
+                    activeFilter === "all"
+                      ? "border-blue-5 bg-blue-7 text-white-1 shadow-md ring-1 ring-blue-5/50"
+                      : "border-white/20 bg-blue-9/80 text-white-1/90 hover:border-blue-5/50 hover:bg-blue-8/90 hover:text-white-1",
+                  )}
+                >
+                  All
+                  <span
+                    className={cn(
+                      "ml-1.5 tabular-nums",
+                      activeFilter === "all"
+                        ? "text-blue-2"
+                        : "text-white-1/55",
+                    )}
+                  >
+                    {projectsEn.length}
+                  </span>
+                </button>
+                {PROJECT_CATEGORIES.map((category) => {
+                  const count = categoryCounts.get(category) ?? 0;
+                  const isActive = activeFilter === category;
+                  const disabled = count === 0;
+                  return (
+                    <button
+                      key={category}
+                      type="button"
+                      disabled={disabled}
+                      onClick={() => {
+                        if (!disabled) setActiveFilter(category);
+                      }}
+                      aria-pressed={isActive}
+                      aria-disabled={disabled}
+                      className={cn(
+                        filterChipBase,
+                        disabled &&
+                          "cursor-not-allowed border-white/[0.07] bg-blue-10/25 text-white-1/35 shadow-none hover:bg-blue-10/25",
+                        !disabled &&
+                          isActive &&
+                          "border-blue-5 bg-blue-7 text-white-1 shadow-md ring-1 ring-blue-5/50",
+                        !disabled &&
+                          !isActive &&
+                          "border-white/20 bg-blue-9/80 text-white-1/90 hover:border-blue-5/50 hover:bg-blue-8/90 hover:text-white-1",
+                      )}
+                    >
+                      {category}
+                      <span
+                        className={cn(
+                          "ml-1.5 tabular-nums",
+                          disabled && "text-white-1/25",
+                          !disabled &&
+                            isActive &&
+                            "text-blue-2",
+                          !disabled &&
+                            !isActive &&
+                            "text-white-1/55",
+                        )}
+                      >
+                        {count}
+                      </span>
+                    </button>
+                  );
+                })}
+              </div>
+            </div>
+          </div>
+
+          <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3">
+            {filteredProjects.length === 0 ? (
+              <div
+                className={cn(
+                  "col-span-full rounded-xl border border-blue-7/30 bg-blue-10/40 px-6 py-14 text-center",
+                  fontInter.className,
+                )}
+              >
+                <p className="text-base font-medium text-white-1">
+                  Nothing in this category yet
+                </p>
+                <p className="mt-2 text-sm text-blue-3/75">
+                  Try another filter or view all projects.
+                </p>
+                <button
+                  type="button"
+                  onClick={() => setActiveFilter("all")}
+                  className={cn(
+                    filterChipBase,
+                    "mt-6 border-blue-5 bg-blue-7 px-5 py-2.5 text-white-1 shadow-md ring-1 ring-blue-5/50 hover:bg-blue-8",
+                    fontInter.className,
+                  )}
+                >
+                  Show all projects
+                </button>
+              </div>
+            ) : (
+              filteredProjects.map((project) => (
+                <div key={project.id} className="flex justify-center">
+                  <Project
+                    id={project.id}
+                    isExpanded={expandedProjectId === project.id}
+                    onExpand={handleExpandProject}
+                    showCategoryPills
+                    className="max-w-full flex-grow-0 transition-transform duration-300 hover:scale-[1.02] sm:max-w-md lg:max-w-sm"
+                  />
+                </div>
+              ))
+            )}
           </div>
         </section>
       </div>
@@ -202,6 +375,23 @@ export default function ProjectsPage() {
                 >
                   {expandedProject.title}
                 </h2>
+                {expandedProject.categories.length > 0 && (
+                  <div
+                    className={cn(
+                      "mb-3 flex flex-wrap gap-2",
+                      fontInter.className,
+                    )}
+                  >
+                    {expandedProject.categories.map((cat) => (
+                      <span
+                        key={cat}
+                        className="rounded-full border border-white/20 bg-white/10 px-2.5 py-1 text-xs text-white-1/90"
+                      >
+                        {cat}
+                      </span>
+                    ))}
+                  </div>
+                )}
                 <p
                   className={cn(
                     "text-sm leading-relaxed text-white-1/90 lg:text-base",

@@ -14,9 +14,18 @@ type Props = {
   isExpanded: boolean;
   onExpand: (id: number) => void;
   className?: string;
+  /** When true, show category pills on the card (projects page). */
+  showCategoryPills?: boolean;
 };
 
-function Project({ ref, id, isExpanded, onExpand, className }: Props) {
+function Project({
+  ref,
+  id,
+  isExpanded,
+  onExpand,
+  className,
+  showCategoryPills = false,
+}: Props) {
   const projects = projectsEn;
 
   const selectedProject = projects.find((project) => project.id === id);
@@ -50,6 +59,27 @@ function Project({ ref, id, isExpanded, onExpand, className }: Props) {
           sizes="(max-width: 1024px) 100vw, 24rem"
         />
       </div>
+
+      {showCategoryPills &&
+        selectedProject?.categories &&
+        selectedProject.categories.length > 0 && (
+          <div
+            className="pointer-events-none absolute bottom-0 left-0 right-0 z-[1] flex flex-wrap justify-center gap-1.5 bg-gradient-to-t from-black/85 via-black/50 to-transparent px-3 pb-3 pt-8"
+            aria-hidden
+          >
+            {selectedProject.categories.map((cat) => (
+              <span
+                key={cat}
+                className={cn(
+                  "rounded-full border border-white/25 bg-black/40 px-2 py-0.5 text-[10px] font-medium text-white-1/95 backdrop-blur-sm sm:text-xs",
+                  fontInter.className,
+                )}
+              >
+                {cat}
+              </span>
+            ))}
+          </div>
+        )}
 
       <div
         className="absolute inset-0 flex flex-col items-center justify-center bg-black/70 p-4 opacity-0 transition-opacity duration-300 group-hover:opacity-100"

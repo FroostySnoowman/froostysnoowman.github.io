@@ -1,3 +1,4 @@
+import type { StaticImageData } from "next/image";
 import mybreakpointImg from "../public/img/projects/mybreakpoint.png";
 import servicesxImg from "../public/img/projects/servicesx.png";
 import ticketsxImg from "../public/img/projects/ticketsx.png";
@@ -5,7 +6,27 @@ import craftdownunderImg from "../public/img/projects/craftdownunder.png";
 import portfolioImg from "../public/img/projects/portfolio.png";
 import b2bImg from "../public/img/projects/b2b.png";
 
-const projects = [
+export const PROJECT_CATEGORIES = [
+  "Web Development",
+  "App Development",
+  "Bot Development",
+  "Plugin Development",
+  "Configuration & Setups",
+] as const;
+
+export type ProjectCategory = (typeof PROJECT_CATEGORIES)[number];
+
+export type PortfolioProject = {
+  id: number;
+  title: string;
+  description: string;
+  image_path: StaticImageData;
+  link: string;
+  color: string;
+  categories: ProjectCategory[];
+};
+
+const projects: PortfolioProject[] = [
   {
     id: 1,
     title: "MyBreakPoint",
@@ -13,6 +34,7 @@ const projects = [
     image_path: mybreakpointImg,
     link: "https://mybreakpoint.net",
     color: "#5b21b6",
+    categories: ["App Development", "Web Development"],
   },
   {
     id: 2,
@@ -21,6 +43,7 @@ const projects = [
     image_path: servicesxImg,
     link: "https://servicesx.net",
     color: "#0d9488",
+    categories: ["Web Development", "Bot Development"],
   },
   {
     id: 3,
@@ -29,6 +52,7 @@ const projects = [
     image_path: ticketsxImg,
     link: "https://ticketsx.xyz",
     color: "#4f46e5",
+    categories: ["Web Development", "Bot Development", "Plugin Development"],
   },
   {
     id: 4,
@@ -37,6 +61,11 @@ const projects = [
     image_path: craftdownunderImg,
     link: "https://www.craftdownunder.co",
     color: "#b45309",
+    categories: [
+      "Web Development",
+      "Bot Development",
+      "Configuration & Setups",
+    ],
   },
   {
     id: 5,
@@ -45,6 +74,7 @@ const projects = [
     image_path: portfolioImg,
     link: "https://froostysnoowman.github.io",
     color: "#0e7490",
+    categories: ["Web Development"],
   },
   {
     id: 6,
@@ -53,6 +83,7 @@ const projects = [
     image_path: b2bImg,
     link: "#",
     color: "#6d28d9",
+    categories: ["Web Development", "Configuration & Setups"],
   },
 ];
 
