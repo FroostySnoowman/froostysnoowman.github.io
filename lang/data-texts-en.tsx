@@ -51,7 +51,8 @@ const textsEn = {
     },
   },
   projects: {
-    seeMore: "Click to expand",
+    seeMore: "Click anywhere on the card to open",
+    cardOpenHint: "Open for full screenshot and details.",
     noDescription: "No description available.",
     altProjects: "Project illustration",
   },
