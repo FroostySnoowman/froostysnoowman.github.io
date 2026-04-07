@@ -32,6 +32,31 @@ function Project({
 
   const { texts } = useLanguage();
 
+  const categoryList = selectedProject?.categories;
+  const hasCategoryChips =
+    showCategoryPills && categoryList && categoryList.length > 0;
+
+  const renderCategoryChips = () =>
+    hasCategoryChips && categoryList ? (
+      <div className="flex flex-wrap justify-center gap-1.5">
+        {categoryList.map((cat) => (
+          <span
+            key={cat}
+            className={cn(
+              "rounded-full border border-white/25 bg-black/40 px-2 py-0.5 text-[10px] font-medium text-white-1/95 backdrop-blur-sm sm:text-xs",
+              fontInter.className,
+            )}
+          >
+            {cat}
+          </span>
+        ))}
+      </div>
+    ) : null;
+
+  const title = selectedProject?.title;
+  const description =
+    selectedProject?.description ?? texts.projects.noDescription;
+
   return (
     <div
       ref={ref}
@@ -45,9 +70,19 @@ function Project({
         background: "transparent",
       }}
       onClick={() => onExpand(id)}
-      onKeyDown={(e) => e.key === "Enter" && onExpand(id)}
+      onKeyDown={(e) => {
+        if (e.key === "Enter" || e.key === " ") {
+          e.preventDefault();
+          onExpand(id);
+        }
+      }}
       role="button"
       tabIndex={0}
+      aria-label={
+        title
+          ? `${title}. ${texts.projects.cardOpenHint}`
+          : texts.projects.cardOpenHint
+      }
     >
       <div className="absolute inset-0 flex items-center justify-center transition-[filter] duration-300 group-hover:blur-[12px] lg:group-hover:blur-[16px]">
         <Image
@@ -60,62 +95,49 @@ function Project({
         />
       </div>
 
-      {showCategoryPills &&
-        selectedProject?.categories &&
-        selectedProject.categories.length > 0 && (
-          <div
-            className="pointer-events-none absolute bottom-0 left-0 right-0 z-[1] flex flex-wrap justify-center gap-1.5 bg-gradient-to-t from-black/85 via-black/50 to-transparent px-3 pb-3 pt-8"
-            aria-hidden
-          >
-            {selectedProject.categories.map((cat) => (
-              <span
-                key={cat}
-                className={cn(
-                  "rounded-full border border-white/25 bg-black/40 px-2 py-0.5 text-[10px] font-medium text-white-1/95 backdrop-blur-sm sm:text-xs",
-                  fontInter.className,
-                )}
-              >
-                {cat}
-              </span>
-            ))}
-          </div>
-        )}
+      {/* Shown when idle; hidden on hover so overlay chips + footer stay visible */}
+      {hasCategoryChips && (
+        <div
+          className="pointer-events-none absolute bottom-0 left-0 right-0 z-[1] flex justify-center bg-gradient-to-t from-black/85 via-black/50 to-transparent px-3 pb-3 pt-8 opacity-100 transition-opacity duration-300 group-hover:opacity-0"
+          aria-hidden
+        >
+          {renderCategoryChips()}
+        </div>
+      )}
 
       <div
-        className="absolute inset-0 flex flex-col items-center justify-center bg-black/70 p-4 opacity-0 transition-opacity duration-300 group-hover:opacity-100"
-        onClick={() => onExpand(id)}
-        role="presentation"
+        className="pointer-events-none absolute inset-0 z-[2] flex min-h-0 flex-col bg-black/70 p-3 opacity-0 transition-opacity duration-300 group-hover:pointer-events-auto group-hover:opacity-100 sm:p-4"
       >
         <h3
           className={cn(
-            "text-center text-lg font-bold text-white-1 lg:text-xl",
+            "shrink-0 text-center text-lg font-bold text-white-1 lg:text-xl",
             fontJersey15.className,
           )}
         >
-          {selectedProject?.title}
+          {title}
         </h3>
         <p
           className={cn(
-            "mt-2 max-h-[60vh] overflow-y-auto overflow-x-hidden text-center text-xs leading-relaxed text-white-1/90 lg:text-sm",
+            "mt-2 min-h-0 flex-1 overflow-y-auto overflow-x-hidden text-center text-xs leading-relaxed text-white-1/90 lg:text-sm",
             fontInter.className,
           )}
-          onClick={(e) => e.stopPropagation()}
-          onKeyDown={(e) => e.stopPropagation()}
-          role="article"
-          tabIndex={0}
         >
-          {selectedProject?.description ?? texts.projects.noDescription}
+          {description}
         </p>
         <span
           className={cn(
-            "mt-3 inline-block rounded-full border border-white/40 bg-white/10 px-3 py-1.5 text-xs font-medium text-white-1 lg:text-sm",
+            "mt-2 shrink-0 text-center text-[11px] font-medium text-white-1/70 lg:text-xs",
             fontInter.className,
           )}
         >
           {texts.projects.seeMore}
         </span>
+        {hasCategoryChips && (
+          <div className="mt-2 shrink-0 border-t border-white/10 pt-2">
+            {renderCategoryChips()}
+          </div>
+        )}
       </div>
-
     </div>
   );
 }
