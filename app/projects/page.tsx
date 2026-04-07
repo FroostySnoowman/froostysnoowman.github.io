@@ -5,6 +5,7 @@ import { createPortal } from "react-dom";
 import ViewTransitionLink from "../components/ViewTransitionLink";
 import Image from "next/image";
 import Project from "../components/Project";
+import ProjectImageCarousel from "../components/ProjectImageCarousel";
 import ProjectOutboundLink from "../components/ProjectOutboundLink";
 import { fontJersey15, fontInter } from "@/lib/font";
 import { cn } from "@/lib/utils";
@@ -340,7 +341,7 @@ export default function ProjectsPage() {
             onClick={() => setExpandedProjectId(-1)}
             role="dialog"
             aria-modal="true"
-            aria-label="Project screenshot"
+            aria-label="Project gallery"
           >
             <div
               className="relative flex max-h-[90vh] max-w-[90vw] flex-col overflow-auto rounded-lg bg-blue-9 shadow-2xl"
@@ -349,23 +350,18 @@ export default function ProjectsPage() {
               <button
                 type="button"
                 onClick={() => setExpandedProjectId(-1)}
-                className="absolute right-2 top-2 z-10 flex h-8 w-8 items-center justify-center rounded-full bg-white/10 text-white-1 transition-colors hover:bg-white/20 focus:outline-none focus:ring-2 focus:ring-blue-8"
+                className="absolute right-2 top-2 z-[30] flex h-8 w-8 items-center justify-center rounded-full bg-white/10 text-white-1 transition-colors hover:bg-white/20 focus:outline-none focus:ring-2 focus:ring-blue-8"
                 aria-label="Close"
               >
                 <span className="text-xl leading-none" aria-hidden>
                   ×
                 </span>
               </button>
-              <div className="relative h-[60vh] w-full max-w-[90vw] shrink-0 md:h-[70vh]">
-                <Image
-                  src={expandedProject.image_path}
-                  alt=""
-                  placeholder="blur"
-                  fill
-                  className="object-contain"
-                  sizes="(max-width: 768px) 90vw, 1200px"
-                />
-              </div>
+              <ProjectImageCarousel
+                key={expandedProject.id}
+                images={expandedProject.images}
+                title={expandedProject.title}
+              />
               <div className="p-4 sm:p-6">
                 <h2
                   className={cn(

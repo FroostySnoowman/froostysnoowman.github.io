@@ -5,7 +5,7 @@ import { fontJersey15, fontInter } from "@/lib/font";
 import "../style/project.css";
 import Image from "next/image";
 import { Ref } from "react";
-import projectsEn from "../../lang/data-projects-en";
+import projectsEn, { projectCoverImage } from "../../lang/data-projects-en";
 import { useLanguage } from "../contexts/language-context";
 
 type Props = {
@@ -86,7 +86,11 @@ function Project({
     >
       <div className="absolute inset-0 flex items-center justify-center transition-[filter] duration-300 group-hover:blur-[12px] lg:group-hover:blur-[16px]">
         <Image
-          src={selectedProject?.image_path ?? ""}
+          src={
+            selectedProject
+              ? (projectCoverImage(selectedProject) ?? "")
+              : ""
+          }
           placeholder="blur"
           alt=""
           fill
